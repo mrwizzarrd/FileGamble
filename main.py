@@ -28,10 +28,10 @@ Go.pack(pady=3)
 
 promptWindow.mainloop()
 
-
+safeMode = False
 #mainDirectory = input("Main directiory you want the game to delete files from: ")
-if mainDirectory in ["test", "t", "testing"]:
-    mainDirectory = ".\\testing"
+if mainDirectory == 't':
+    safeMode = True
 
 #basic initialization
 score = 0
@@ -72,7 +72,11 @@ def onButtonClick(num):
     choice = random.choice(nums)
     if num == choice:
         evilLaugh.play()
-        Label1.config(text=f"{YouLose()} deleted!")
+        if safeMode:
+              Label1.config(text=f"Safe Mode Enabled, no files deleted!")
+        else:
+              Label1.config(text=f"{YouLose()} deleted!")
+       
         score = 0
         ScoreLabel.config(text=f"Score: {score}")
     else:
